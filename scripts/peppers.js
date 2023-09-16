@@ -2,32 +2,44 @@ var peppers = 0;
 var dollars = 10;
 var logCount = 0;
 
-function upgradeHandler() {
-    alert("TODO");
+function shopHandler() {
+    alert("TODO: Add a farmhand");
 }
 
-// function clickHandler() {
-//     clicks++;
-//     document.getElementById("labelPeppers").innerText = ("Peppers: " + clicks);
+function upgradeHandler() {
+    alert("TODO: Add upgrade 1");
+}
 
-//     if (clicks == 10) {
-//         addLog("Clicked ten times!");
+function clickHandler() {
+    peppers++;
+    document.getElementById("labelPeppers").innerText = ("Peppers: " + peppers);
 
-//         upgradeButton = document.createElement("button");
-//         upgradeButton.type = "button";
-//         upgradeButton.textContent = "Upgrade 1";
+    if (peppers == 10) {
+        addLog("Grew ten peppers!");
 
-//         document.getElementById("rightSide").appendChild(upgradeButton);
+        farmhandButton = document.createElement("button");
+        farmhandButton.type = "button";
+        farmhandButton.textContent = "Farmhand";
 
-//         upgradeButton.addEventListener("click", upgradeHandler);
+        document.getElementById("divStore").appendChild(farmhandButton);
 
-//     }
-//     else if (clicks == 100) {
-//         addLog("Clicked one hundred times!");
-//     }
-// }
+        farmhandButton.addEventListener("click", shopHandler);
 
-// document.querySelector('#btnClicker').addEventListener("click", clickHandler);
+    }
+    else if (peppers == 100) {
+        addLog("Grew one hundred peppers!");
+
+        upgradeButton = document.createElement("button");
+        upgradeButton.type = "button";
+        upgradeButton.textContent = "Upgrade 1";
+
+        document.getElementById("divUpgrade").appendChild(upgradeButton);
+
+        upgradeButton.addEventListener("click", upgradeHandler);
+    }
+}
+
+document.querySelector('#btnClicker').addEventListener("click", clickHandler);
 
 function addLog(message) {
     // var timestamp = new Date(Date.now()).toISOString();
@@ -36,7 +48,7 @@ function addLog(message) {
 }
 
 function start() {
-    addLog("Click the button!");
+    addLog("Pick some peppers!");
 }
 
 start();
