@@ -2,8 +2,26 @@ var peppers = 0;
 var dollars = 10;
 var logCount = 0;
 
+var farmHandsUnlocked = false;
+var farmhandCount = 0;
+var farmhandCost = 10;
+
+var farmhandButton;
+
+function drawPepperCount() {
+    document.getElementById("labelPeppers").innerText = ("Peppers: " + peppers);
+}
+
 function shopHandler() {
-    alert("TODO: Add a farmhand");
+    if (peppers >= farmhandCost) {
+        peppers -= farmhandCost;
+        farmhandCount++;
+        farmhandCost = Math.floor(farmhandCost * 1.10);
+
+        farmhandButton.textContent = (farmhandCount + " Farmhands (Cost: " + farmhandCost + ")");
+
+        drawPepperCount();
+    }
 }
 
 function upgradeHandler() {
@@ -12,14 +30,17 @@ function upgradeHandler() {
 
 function clickHandler() {
     peppers++;
-    document.getElementById("labelPeppers").innerText = ("Peppers: " + peppers);
 
-    if (peppers == 10) {
+    drawPepperCount();
+
+    if (peppers >= 10 && !farmHandsUnlocked) {
         addLog("Grew ten peppers!");
+
+        farmHandsUnlocked = true;
 
         farmhandButton = document.createElement("button");
         farmhandButton.type = "button";
-        farmhandButton.textContent = "Farmhand";
+        farmhandButton.textContent = (farmhandCount + " Farmhands (Cost: " + farmhandCost + ")");
 
         document.getElementById("divStore").appendChild(farmhandButton);
 
@@ -47,8 +68,18 @@ function addLog(message) {
     document.getElementById("txtLog").value += (logCount + ": " + message + "\n");
 }
 
+function tick() {
+    if (farmhandCount != 0) {
+        peppers += farmhandCount;
+    }
+
+    drawPepperCount();
+}
+
 function start() {
     addLog("Pick some peppers!");
+
+    setInterval(tick, 1000);
 }
 
 start();
