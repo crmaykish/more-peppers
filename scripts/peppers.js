@@ -6,6 +6,7 @@ var peppersLifetime = 0;
 var farmHandsUnlocked = false;
 var farmhandCount = 0;
 var farmhandCost = 10;
+var farmhandRate = 0.2;
 
 var upgrade1Unlocked = false;
 var upgrade1Cost = 100;
@@ -19,6 +20,7 @@ var tickDelayMS = 1000 / tickRateHz;
 // UI Elements
 var buttonPick = document.querySelector('#btnClicker');
 var labelPeppers = document.getElementById("labelPeppers");
+var labelPPS = document.getElementById("labelPeppersPerSecond");
 var textLog = document.getElementById("txtLog");
 
 var farmhandButton;
@@ -26,6 +28,11 @@ var upgradeButton;
 
 function drawPepperCount() {
     labelPeppers.innerText = ("Peppers: " + Math.floor(peppersCurrent));
+    labelPPS.innerText = "Per Second: " + peppersPerSecond().toFixed(2);
+}
+
+function peppersPerSecond() {
+    return farmhandCount * farmhandRate;
 }
 
 function shopHandler() {
@@ -71,10 +78,14 @@ function addLog(message) {
 }
 
 function tick() {
+
     var increment = 0;
+    
     if (farmhandCount != 0) {
-        increment += (farmhandCount / tickRateHz);
+        increment += (farmhandRate * farmhandCount);
     }
+
+    increment /= tickRateHz;
 
     peppersCurrent += increment;
     peppersLifetime += increment;
