@@ -9,19 +9,17 @@
         }
 
         button {
-            border: none;
-            color: white;
-            background-color: lightcoral;
             padding: 15px 24px;
             font-size: 32px;
+        }
+
+        textarea {
+            font-size: 18px;
         }
 
         #titleBar {
             float: left;
             width: 100%;
-            /* color: white; */
-            background-color: lightseagreen;
-            margin-bottom: 8px;
         }
 
         #leftSide {
@@ -34,13 +32,9 @@
             width: 50%;
         }
 
-        .uiContainer {
-            /* background-color: lightskyblue; */
-        }
-
-        .uiLabel {
-            background-color: lightseagreen;
-            /* color: white; */
+        #footer {
+            float: left;
+            width: 100%;
         }
     </style>
 </head>
@@ -53,9 +47,7 @@
 
     <div id="leftSide">
         <div class="uiContainer">
-            <h2 class="uiLabel">Stats</h2>
-            <h2 id="labelPeppers">Peppers: 0</h2>
-            <h2 id="labelDollars">$0</h2>
+            <h2 id="labelPeppers"></h2>
             <button class="button" id="btnClicker" type="button">Pick Pepper</button>
         </div>
 
@@ -72,6 +64,10 @@
             <h2 class="uiLabel">Upgrades</h2>
             <div id="divUpgrade"></div>
         </div>
+    </div>
+
+    <div id="footer">
+        <p id="gameVersion"></p>
     </div>
 
     <script src="scripts/peppers.js"></script>
